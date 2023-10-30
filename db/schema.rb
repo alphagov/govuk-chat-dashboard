@@ -10,7 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_10_23_102154) do
+ActiveRecord::Schema[7.0].define(version: 2023_10_30_143405) do
+  create_table "chats", force: :cascade do |t|
+    t.string "uuid"
+    t.text "prompt"
+    t.json "reply"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "feedbacks", force: :cascade do |t|
     t.integer "chat_id"
     t.string "uuid"
