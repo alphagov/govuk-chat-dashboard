@@ -10,9 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_10_30_143405) do
+ActiveRecord::Schema[7.0].define(version: 2023_11_01_160043) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "answers", force: :cascade do |t|
+    t.integer "feedback_id"
+    t.string "header"
+    t.string "title"
+    t.string "value"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "chats", force: :cascade do |t|
     t.string "uuid"
@@ -28,6 +37,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_30_143405) do
     t.string "version"
     t.string "level"
     t.json "response"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "tags", force: :cascade do |t|
+    t.integer "chat_id"
+    t.string "title"
+    t.string "value"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
