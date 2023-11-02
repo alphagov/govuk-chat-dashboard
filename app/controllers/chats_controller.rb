@@ -1,23 +1,26 @@
 class ChatsController < ApplicationController
-  wrap_parameters Chat
+  skip_forgery_protection only: [:create]
+  skip_before_action :authenticate_user!, only: [:create]
+
   def index
-    render json: Chat.all
+    @chats = Chat.all
   end
 
   def create
     chat = Chat.new(chat_params)
 
-    if chat.save
-      render json: chat, status: :created
-    else
-      render json: chat.errors, status: :unprocessable_entity
+    unless Chat.all.map(&:id).include?(chat.id)
+      chat.answer = chat.reply["answer"]
+      chat.sources = chat.reply["sources"].join(" | ")
+      chat.save
     end
+
+    redirect_to chat, status: :ok
   end
 
   private
 
   def chat_params
-    params.require(:chat).permit(:id, :uuid, :prompt, :reply, :created_at, :updated_at)
+    params.require(:chat).permit(:id, :uuid, :prompt, :created_at, :updated_at, reply: {})
   end
 end
-

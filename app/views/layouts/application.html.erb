@@ -1,15 +1,38 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>GovukChatDashboard</title>
+    <title>GOV.UK Chat Dashboard</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag "https://cdn.simplecss.org/simple.min.css" %>
+    <%= javascript_include_tag "turbo", type: "module" %>
+    <%= javascript_importmap_tags %>
   </head>
 
   <body>
-    <%= yield %>
+    <header>
+      <h1>GOV.UK Chat Dashboard</h1>
+      <nav>
+        <%= link_to "Home", root_path %>
+        <%= link_to "Feedback", feedbacks_path %>
+        <%= link_to "Chat", chats_path %>
+        <% if user_signed_in? %>
+          <%= link_to "Log out", destroy_user_session_path, data: { turbo_method: :delete } %>
+        <% else %>
+          <%= link_to "Log in", new_user_session_path %>
+        <% end %>
+      </nav>
+    </header>
+
+    <main>
+      <% if notice or alert %>
+        <p class="notice"><%= notice %> <%= alert %></p>
+      <% end %>
+
+      <%= yield %>
+    </main>
   </body>
 </html>

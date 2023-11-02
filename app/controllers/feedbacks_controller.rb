@@ -1,16 +1,29 @@
 class FeedbacksController < ApplicationController
+  skip_forgery_protection only: [:create]
+  skip_before_action :authenticate_user!, only: [:create]
+
   def index
-    render json: Feedback.all
+    @feedbacks = Feedback.all
   end
 
   def create
     feedback = Feedback.new(feedback_params)
 
-    if feedback.save
-      render json: feedback, status: :created
-    else
-      render json: feedback.errors, status: :unprocessable_entity
+    unless Feedback.all.map(&:id).include?(feedback.id)
+      if feedback.save
+        feedback.response.each do |key, value|
+          Answer.create!(
+            feedback_id: feedback.id,
+            header: key,
+            value: value,
+            created_at: feedback.created_at,
+            updated_at: feedback.updated_at,
+          )
+        end
+      end
     end
+
+    redirect_to feedback, status: :ok
   end
 
   private

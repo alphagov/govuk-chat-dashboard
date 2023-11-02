@@ -1,3 +1,3 @@
 class Chat < ApplicationRecord
-    has_many :tags
+  has_many :tags
 end
