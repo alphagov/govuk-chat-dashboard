@@ -7,6 +7,7 @@ gem "rails", "7.0.7"
 
 gem "bootsnap", require: false
 gem "devise"
+gem 'faker'
 gem "importmap-rails"
 gem "jbuilder"
 gem "pg"
