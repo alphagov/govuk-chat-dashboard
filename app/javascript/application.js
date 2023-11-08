@@ -1,1 +1,107 @@
-// Configure your import map in config/importmap.rb. Read more: https://github.com/rails/importmap-rails
+function humanize(title) {
+  title = title.replaceAll("_", " ")
+  return title.charAt(0).toUpperCase() + title.slice(1)
+}
+
+function buildChart(chart) {
+  var ctx = document.getElementById(chart.label)
+  var keys = new Array()
+  var values = new Array()
+
+  for (var key in chart.data) {
+    keys.push(key)
+    values.push(chart.data[key])
+  }
+
+  Chart.defaults.set(
+    "plugins.datalabels", {
+    color: "#ffffff",
+    font: {
+      weight: "bold",
+      size: 18
+    }
+  }
+  )
+
+  // Chart colours from here: https://analysisfunction.civilservice.gov.uk/policy-store/data-visualisation-colours-in-charts/
+  // as recommended here: https://design-system.service.gov.uk/styles/colour/
+  new Chart(ctx, {
+    plugins: [ChartDataLabels],
+    type: "pie",
+    data: {
+      labels: keys,
+      datasets: [{
+        label: chart.label,
+        data: values,
+        borderWidth: 0,
+        backgroundColor: [
+          "rgb(18, 67, 109)",
+          "rgb(40, 161, 151)",
+          "rgb(128, 22, 80)",
+          "rgb(244, 106, 37)",
+          "rgb(61, 61, 61)",
+          "rgb(162, 133, 209)"
+        ]
+      }]
+    },
+    options: {
+      plugins: {
+        title: {
+          display: true,
+          align: "center",
+          position: "top",
+          color: "#000000",
+          padding: {
+            top: 80,
+            bottom: 30
+          },
+          font: {
+            weight: "bold",
+            size: 42
+          },
+          text: humanize(chart.label)
+        }
+      }
+    }
+  })
+}
+
+function buildTable(chart) {
+  var ctx = document.getElementById("data")
+
+  var table = document.createElement("table")
+  var thead = document.createElement("thead")
+  var row = document.createElement("tr")
+
+  var answer = document.createElement("th")
+  var answerText = document.createTextNode("Answer")
+  answer.appendChild(answerText)
+  var count = document.createElement("th")
+  var countText = document.createTextNode("Count")
+  count.appendChild(countText)
+
+  row.appendChild(answer)
+  row.appendChild(count)
+  thead.appendChild(row)
+  table.appendChild(thead)
+
+  var tbody = document.createElement("tbody")
+
+  for (key in chart.data) {
+    var row = document.createElement("tr")
+
+    var answer = document.createElement("td")
+    var answerText = document.createTextNode(key)
+    answer.appendChild(answerText)
+    var count = document.createElement("td")
+    var countText = document.createTextNode(chart.data[key])
+    count.appendChild(countText)
+
+    row.appendChild(answer)
+    row.appendChild(count)
+    tbody.appendChild(row)
+  }
+
+  table.appendChild(tbody)
+  ctx.append(table)
+}
