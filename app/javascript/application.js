@@ -45,6 +45,7 @@ function buildChart(chart) {
       }]
     },
     options: {
+      onClick: chartClick,
       plugins: {
         title: {
           display: true,
@@ -64,6 +65,15 @@ function buildChart(chart) {
       }
     }
   })
+}
+
+function chartClick(event, array) {
+  // This is ok for simple charts with a single dataset
+  // But, may not work correctly for anything stacked!
+  var labels = event.chart.config._config.data.labels
+  var answer = labels[array[0].index]
+  var chartName = event.chart.canvas.id
+  console.log(chartName + ": " + answer)
 }
 
 function buildTable(chart) {
