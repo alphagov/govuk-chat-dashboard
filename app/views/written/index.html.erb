@@ -1,6 +1,7 @@
 <% @answers.each do |answer| %>
-  <article>
-    <p><%= answer.value %></p>
-    <p><%= link_to "View", answers_show_path(id: answer.id) %></p>
-  </article>
+  <details>
+    <summary><%= answer.value %></summary>
+    <%= render "answers/answers", answers: answer.feedback.answers.where.not(header: "was_answer_useful") %>
+    <p><%= link_to "View conversation", answers_show_path(id: answer.id) %> [<%= answer.feedback.uuid %>]</p>
+  </details>
 <% end %>
