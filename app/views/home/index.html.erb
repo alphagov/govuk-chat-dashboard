@@ -1,8 +1,11 @@
 <h2>Welcome <%= current_user.name %></h2>
 
-<h3>Conversations</h3>
-
 <table>
+  <thead>
+    <tr>
+      <th colspan=2 style="text-align: center;">Conversations</th>
+    </tr>
+  </thead>
   <tbody>
     <tr>
       <td>Number of people that opened the prototype link</td>
@@ -20,9 +23,12 @@
   </tbody>
 </table>
 
-<h3>Questions</h3>
-
 <table>
+  <thead>
+    <tr>
+      <th colspan=2 style="text-align: center;">Questions</th>
+    </tr>
+  </thead>
   <tbody>
     <tr>
       <td>Number of queries submitted to GOV.UK Chat</td>
