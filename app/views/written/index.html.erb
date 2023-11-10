@@ -1,0 +1,6 @@
+<% @answers.each do |answer| %>
+  <article>
+    <p><%= answer.value %></p>
+    <p><%= link_to "View", answers_show_path(id: answer.id) %></p>
+  </article>
+<% end %>

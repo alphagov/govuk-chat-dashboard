@@ -1,1 +1,41 @@
-<h2>Welcome</h2>
+<h2>Welcome <%= current_user.name %></h2>
+
+<table>
+  <tbody>
+    <tr>
+      <td>Total no. of conversations</td>
+      <td>
+        <%= @total_chats %>
+      </td>
+    </tr>
+    <tr>
+      <td>Total no. of conversation feedback</td>
+      <td>
+        <%= @conversation_feedback_count%>
+        <%= @percentage_conversation_feedback %>
+      </td>
+    </tr>
+    <tr>
+      <td>Total no. of questions</td>
+      <td><%= @total_questions %></td>
+    </tr>
+    <tr>
+      <td>Total no. of question feedback</td>
+      <td><%= @message_count %></td>
+    </tr>
+    <tr>
+      <td>Total no. of valid replies</td>
+      <td>
+        <%= @total_valid_replies %>
+        <%= @percentage_valid_replies%>
+      </td>
+    </tr>
+    <tr>
+      <td>Total no. of invalid replies</td>
+      <td>
+        <%= @total_invalid_replies %>
+        <%= @percentage_invalid_replies %>
+      </td>
+    </tr>
+  </tbody>
+</table>

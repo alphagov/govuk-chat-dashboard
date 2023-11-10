@@ -10,16 +10,21 @@
     <%= stylesheet_link_tag "https://cdn.simplecss.org/simple.min.css" %>
     <%= javascript_include_tag "turbo", type: "module" %>
     <%= javascript_importmap_tags %>
+    <%= javascript_include_tag "application.js" %>
+    <%= javascript_include_tag "https://cdn.jsdelivr.net/npm/chart.js" %>
+    <%= javascript_include_tag "https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0" %>
   </head>
 
   <body>
     <header>
       <h1>GOV.UK Chat Dashboard</h1>
       <nav>
-        <%= link_to "Home", root_path %>
-        <%= link_to "Feedback", feedbacks_path %>
-        <%= link_to "Chat", chats_path %>
         <% if user_signed_in? %>
+          <%= link_to "Home", root_path %>
+          <%= link_to "Explore", explore_index_path %>
+          <%= link_to "Written", written_index_path %>
+          <%= link_to "Feedback", feedbacks_path %>
+          <%= link_to "Chat", chats_path %>
           <%= link_to "Log out", destroy_user_session_path, data: { turbo_method: :delete } %>
         <% else %>
           <%= link_to "Log in", new_user_session_path %>
@@ -27,7 +32,7 @@
       </nav>
     </header>
 
-    <main>
+    <main id="data">
       <% if notice or alert %>
         <p class="notice"><%= notice %> <%= alert %></p>
       <% end %>

@@ -1,0 +1,24 @@
+<% chats = Chat.where(uuid: @answer.feedback.uuid) %>
+
+<% chats.each do |chat| %>
+  <article>
+    <p><strong>Prompt</strong>: <%= chat.prompt %></p>
+    <p><strong>Answer</strong>: <%= chat.answer %></p>
+
+    <% if chat.sources.present? %>
+      <p><strong>Sources</strong></p>
+      <ul>
+        <% chat.sources.split(" | ").each do |url| %>
+          <li><%= link_to url, url %></li>
+        <% end %>
+      </ul>
+    <% end %>
+
+    <% if chat.feedbacks.any? %>
+      <% answer = chat.feedbacks.first.answers.find_by(header: "was_answer_useful") %>
+      <p><strong><%= answer.header.humanize %></strong>: <%= answer.value %></p>
+    <% end %>
+  </article>
+<% end %>
+
+<%= render "answers", answers: @answer.feedback.answers.where.not(header: "was_answer_useful") %>

@@ -1,0 +1,2 @@
+module WrittenHelper
+end
