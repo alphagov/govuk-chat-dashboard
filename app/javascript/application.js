@@ -76,6 +76,11 @@ function chartClick(event, array) {
   console.log(chartName + ": " + answer)
 }
 
+function percentage(x, y) {
+  var percentage = ((x / y) * 100)
+  return "(" + percentage.toFixed(2) + "%)"
+}
+
 function buildTable(chart) {
   var ctx = document.getElementById("data")
 
@@ -89,13 +94,24 @@ function buildTable(chart) {
   var count = document.createElement("th")
   var countText = document.createTextNode("Count")
   count.appendChild(countText)
+  var percent = document.createElement("th")
+  var percentText = document.createTextNode("Percentage")
+  percent.appendChild(percentText)
 
   row.appendChild(answer)
   row.appendChild(count)
+  row.appendChild(percent)
   thead.appendChild(row)
   table.appendChild(thead)
 
   var tbody = document.createElement("tbody")
+
+  console.log(chart.data)
+  var total = 0
+  for (var key in chart.data) {
+    total += chart.data[key]
+  }
+
 
   for (key in chart.data) {
     var row = document.createElement("tr")
@@ -106,9 +122,13 @@ function buildTable(chart) {
     var count = document.createElement("td")
     var countText = document.createTextNode(chart.data[key])
     count.appendChild(countText)
+    var percent = document.createElement("td")
+    var percentText = document.createTextNode(percentage(chart.data[key], total))
+    percent.appendChild(percentText)
 
     row.appendChild(answer)
     row.appendChild(count)
+    row.appendChild(percent)
     tbody.appendChild(row)
   }
 
