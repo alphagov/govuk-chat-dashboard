@@ -18,3 +18,12 @@ table {
   margin-left: auto !important;
   margin-right: auto !important;
 }
+
+details, summary {
+  background-color: white !important;
+  font-weight: normal !important;
+}
+
+code {
+  float: right !important;
+}
