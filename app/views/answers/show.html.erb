@@ -9,7 +9,7 @@
       <p><strong>Sources</strong></p>
       <ul>
         <% chat.sources.split(" | ").each do |url| %>
-          <li><%= link_to url, url %></li>
+          <li><%= link_to url, url, target: "_blank" %></li>
         <% end %>
       </ul>
     <% end %>
