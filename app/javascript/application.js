@@ -106,12 +106,10 @@ function buildTable(chart) {
 
   var tbody = document.createElement("tbody")
 
-  console.log(chart.data)
   var total = 0
   for (var key in chart.data) {
     total += chart.data[key]
   }
-
 
   for (key in chart.data) {
     var row = document.createElement("tr")
