@@ -1,37 +1,46 @@
 <h2>Welcome <%= current_user.name %></h2>
 
+<h3>Conversations</h3>
+
 <table>
   <tbody>
     <tr>
-      <td>Total no. of conversations</td>
+      <td>Number of people that opened the prototype link</td>
       <td>
         <%= @total_chats %>
       </td>
     </tr>
     <tr>
-      <td>Total no. of conversation feedback</td>
+      <td>Number of survey responses</td>
       <td>
         <%= @conversation_feedback_count%>
         <%= @percentage_conversation_feedback %>
       </td>
     </tr>
+  </tbody>
+</table>
+
+<h3>Questions</h3>
+
+<table>
+  <tbody>
     <tr>
-      <td>Total no. of questions</td>
+      <td>Number of queries submitted to GOV.UK Chat</td>
       <td><%= @total_questions %></td>
     </tr>
     <tr>
-      <td>Total no. of question feedback</td>
+      <td>Number of chat responses that received feedback</td>
       <td><%= @message_count %></td>
     </tr>
     <tr>
-      <td>Total no. of valid replies</td>
+      <td>Number of valid replies (from OpenAI)</td>
       <td>
         <%= @total_valid_replies %>
         <%= @percentage_valid_replies%>
       </td>
     </tr>
     <tr>
-      <td>Total no. of invalid replies</td>
+      <td>Number of invalid replies (from OpenAI)</td>
       <td>
         <%= @total_invalid_replies %>
         <%= @percentage_invalid_replies %>
