@@ -2,10 +2,6 @@ class ChatsController < ApplicationController
   skip_forgery_protection only: [:create]
   skip_before_action :authenticate_user!, only: [:create]
 
-  def index
-    @chats = Chat.all
-  end
-
   def create
     chat = Chat.new(chat_params)
 

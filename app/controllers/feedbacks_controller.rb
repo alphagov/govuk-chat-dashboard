@@ -2,10 +2,6 @@ class FeedbacksController < ApplicationController
   skip_forgery_protection only: [:create]
   skip_before_action :authenticate_user!, only: [:create]
 
-  def index
-    @feedbacks = Feedback.all
-  end
-
   def create
     feedback = Feedback.new(feedback_params)
 
