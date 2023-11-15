@@ -1,0 +1,11 @@
+<h2><%= @header.humanize + ": " + @value %></h2>
+<% @answers.each do |answer| %>
+    <% Chat.where(uuid: answer.feedback.uuid).each do |chat| %>
+      <h4>UUID</h4>
+      <%= chat.uuid %>
+      <h4>Prompt</h4>
+      <%= chat.prompt %>
+      <h4>Answer</h4>
+      <%= chat.answer %>
+    <% end %>
+<% end %>
