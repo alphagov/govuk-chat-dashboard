@@ -85,7 +85,8 @@ function chartClick(event, array) {
   var labels = event.chart.config._config.data.labels
   var answer = labels[array[0].index]
   var chartName = event.chart.canvas.id
-  console.log(chartName + ": " + answer)
+  var obj = { header: chartName, value: answer }
+  window.location = "/answers?" + new URLSearchParams(obj).toString();
 }
 
 function percentage(x, y) {
