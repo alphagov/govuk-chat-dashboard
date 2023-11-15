@@ -1,0 +1,8 @@
+<% @answers.each do |answer| %>
+    <% Chat.where(uuid: answer.feedback.uuid).each do |chat| %>
+      <h1>Prompt</h1>
+      <%= chat.prompt %>
+      <h1>Answer</h1>
+      <%= chat.answer %>
+    <% end %>
+<% end %>
