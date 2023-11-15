@@ -1,8 +1,7 @@
 <% @answers.each do |answer| %>
   <details>
-    <summary><%= answer.value %></summary>
+    <summary><code><%= answer.feedback.uuid %></code></summary>
     <%= render "answers/answers", answers: answer.feedback.answers.where.not(header: "was_answer_useful") %>
     <p><%= link_to "View conversation", answer_path(id: answer.id), class: "button" %>
-    <code><%= answer.feedback.uuid %></code>
   </details>
 <% end %>

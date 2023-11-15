@@ -27,7 +27,7 @@ function buildChart(chart) {
   // as recommended here: https://design-system.service.gov.uk/styles/colour/
   new Chart(ctx, {
     plugins: [ChartDataLabels],
-    type: "pie",
+    type: "bar",
     data: {
       labels: keys,
       datasets: [{
