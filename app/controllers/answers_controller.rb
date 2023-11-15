@@ -1,7 +1,9 @@
 class AnswersController < ApplicationController
 
   def index
-    @answers = Answer.where(header: "responses_were_useful", value: "Strongly agree")
+    @header = params[:header]
+    @value = params[:value]
+    @answers = Answer.where(header: @header, value: @value)
   end
 
   def show
