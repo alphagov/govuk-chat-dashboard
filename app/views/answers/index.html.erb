@@ -1,11 +1,23 @@
-<h2><%= @header.humanize + ": " + @value %></h2>
+<h2><%= @header.humanize + " : " + @value %> [<%= @answers.count %>]</h2>
+
 <% @answers.each do |answer| %>
-    <% Chat.where(uuid: answer.feedback.uuid).each do |chat| %>
-      <h4>UUID</h4>
-      <%= chat.uuid %>
-      <h4>Prompt</h4>
-      <%= chat.prompt %>
-      <h4>Answer</h4>
-      <%= chat.answer %>
+  <% uuid = nil %>
+  <% chats = Chat.where(uuid: answer.feedback.uuid) %>
+  <% chats.each_with_index do |chat, index| %>
+    <% unless uuid == chat.uuid %>
+      <% unless index == 0 %></details><% end %>
+      <details>
+      <summary><code><%= answer.feedback.uuid %></code></summary>
     <% end %>
+
+    <p><strong>Prompt</strong>: <%= chat.prompt %></p>
+    <p><strong>Answer</strong>: <%= chat.answer %></p>
+
+    <% if index < chats.count - 1 %><hr><% end %>
+
+    <% uuid = chat.uuid %>
+  <% end %>
+
+  <p><%= link_to "View conversation", answer_path(id: answer.id), class: "button" %>
+  </details>
 <% end %>
