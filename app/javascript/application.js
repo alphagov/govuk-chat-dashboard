@@ -15,12 +15,12 @@ function buildChart(chart) {
 
   Chart.defaults.set(
     "plugins.datalabels", {
-    color: "#ffffff",
-    font: {
-      weight: "bold",
-      size: 18
+      color: "#ffffff",
+      font: {
+        weight: "bold",
+        size: 18
+      }
     }
-  }
   )
 
   // Chart colours from here: https://analysisfunction.civilservice.gov.uk/policy-store/data-visualisation-colours-in-charts/
@@ -40,11 +40,14 @@ function buildChart(chart) {
           "rgb(128, 22, 80)",
           "rgb(244, 106, 37)",
           "rgb(61, 61, 61)",
-          "rgb(162, 133, 209)"
+          "rgb(162, 133, 209)",
+          "rgb(32, 115, 188)",
+          "rgb(107, 172, 230)"
         ]
       }]
     },
     options: {
+      indexAxis: "y",
       onClick: chartClick,
       plugins: {
         title: {
@@ -65,7 +68,7 @@ function buildChart(chart) {
         datalabels: {
           font: {
             weight: "normal",
-            size: 14
+            size: 12
           },
           formatter: (value, ctx) => {
             const datapoints = ctx.chart.data.datasets[0].data
