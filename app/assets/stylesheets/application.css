@@ -27,3 +27,9 @@ details, summary {
 button {
   float: right !important;
 }
+
+.centered {
+  text-align: center;
+  color: "#b3b3b3";
+  font-size: 0.8em;
+}
