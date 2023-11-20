@@ -15,12 +15,12 @@ function buildChart(chart) {
 
   Chart.defaults.set(
     "plugins.datalabels", {
-    color: "#ffffff",
-    font: {
-      weight: "bold",
-      size: 18
+      color: "#ffffff",
+      font: {
+        weight: "bold",
+        size: 18
+      }
     }
-  }
   )
 
   // Chart colours from here: https://analysisfunction.civilservice.gov.uk/policy-store/data-visualisation-colours-in-charts/
@@ -40,11 +40,14 @@ function buildChart(chart) {
           "rgb(128, 22, 80)",
           "rgb(244, 106, 37)",
           "rgb(61, 61, 61)",
-          "rgb(162, 133, 209)"
+          "rgb(162, 133, 209)",
+          "rgb(32, 115, 188)",
+          "rgb(107, 172, 230)"
         ]
       }]
     },
     options: {
+      indexAxis: "y",
       onClick: chartClick,
       plugins: {
         title: {
@@ -65,7 +68,7 @@ function buildChart(chart) {
         datalabels: {
           font: {
             weight: "normal",
-            size: 14
+            size: 12
           },
           formatter: (value, ctx) => {
             const datapoints = ctx.chart.data.datasets[0].data
@@ -104,9 +107,11 @@ function buildTable(chart) {
   var answer = document.createElement("th")
   var answerText = document.createTextNode("Answer")
   answer.appendChild(answerText)
+
   var count = document.createElement("th")
   var countText = document.createTextNode("Count")
   count.appendChild(countText)
+
   var percent = document.createElement("th")
   var percentText = document.createTextNode("Percentage")
   percent.appendChild(percentText)
@@ -128,11 +133,16 @@ function buildTable(chart) {
     var row = document.createElement("tr")
 
     var answer = document.createElement("td")
+    var link = document.createElement("a")
+    link.href = "/answers?" + new URLSearchParams({ header: chart.label, value: key }).toString()
     var answerText = document.createTextNode(key)
-    answer.appendChild(answerText)
+    link.appendChild(answerText)
+    answer.appendChild(link)
+
     var count = document.createElement("td")
     var countText = document.createTextNode(chart.data[key])
     count.appendChild(countText)
+
     var percent = document.createElement("td")
     var percentText = document.createTextNode(percentage(chart.data[key], total))
     percent.appendChild(percentText)
@@ -145,4 +155,12 @@ function buildTable(chart) {
 
   table.appendChild(tbody)
   ctx.append(table)
+
+  var para = document.createElement("p")
+  para.className = "centered"
+  var ital = document.createElement("i")
+  var text = document.createTextNode("Click on the chart or links in the table to view more data.")
+  ital.appendChild(text)
+  para.appendChild(ital)
+  ctx.append(para)
 }
