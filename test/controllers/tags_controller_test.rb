@@ -3,11 +3,19 @@ require "test_helper"
 class TagsControllerTest < ActionDispatch::IntegrationTest
   setup do
     @tag = tags(:one)
+    sign_in(users(:user))
   end
 
   test "should get index" do
     get tags_url, as: :json
     assert_response :success
+  end
+
+  test "should authenticate" do
+    sign_out(users(:user))
+    get tags_url, as: :json
+    assert_response :unauthorized
+    assert_equal '{"error":"You need to sign in or sign up before continuing."}', response.body
   end
 
   test "should create tag" do
