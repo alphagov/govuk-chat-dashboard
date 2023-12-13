@@ -3,7 +3,11 @@ require_relative "../config/environment"
 require "rails/test_help"
 
 require "simplecov"
-SimpleCov.start("rails")
+SimpleCov.start "rails" do
+  add_filter "/channels/"
+  add_filter "/mailers/"
+  add_filter "/jobs/"
+end
 
 class ActiveSupport::TestCase
   include Devise::Test::IntegrationHelpers
