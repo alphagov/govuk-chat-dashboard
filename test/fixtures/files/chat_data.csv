@@ -1,0 +1,3 @@
+id,uuid,prompt,answer,sources,created_at,updated_at
+1,123e4567-e89b-12d3-a456-426614174000,What is AI?,Artificial Intelligence,Source1,2023-01-01,2023-01-01
+2,123e4567-e89b-12d3-a456-426614174001,What is ML?,Machine Learning,Source2,2023-01-02,2023-01-02
