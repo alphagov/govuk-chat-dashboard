@@ -28,6 +28,7 @@ end
 
 group :development do
   gem "web-console"
+  gem "brakeman"
 end
 
 group :test do
