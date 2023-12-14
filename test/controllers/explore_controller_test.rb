@@ -5,7 +5,7 @@ class ExploreControllerTest < ActionDispatch::IntegrationTest
     sign_in(users(:user))
     get explore_index_url
     assert_response :success
-    assert_includes response.body, 'script'
+    assert_includes response.body, "script"
   end
 
   test "get index redirects when unauthenticated" do

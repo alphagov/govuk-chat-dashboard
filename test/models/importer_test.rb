@@ -6,14 +6,16 @@ class ImporterTest < ActiveSupport::TestCase
   setup do
     @csv_content = CSV.read(
       Rails.root.join("test", "fixtures", "files", "answer_data.csv"),
-      headers: true)
+      headers: true,
+    )
     ENV["EXPORT_TO_CLOUD_STORAGE"] = "true"
   end
 
   test "import chats from GCP" do
     csv_content = CSV.read(
       Rails.root.join("test", "fixtures", "files", "answer_data.csv"),
-      headers: true)
+      headers: true,
+    )
     Importer.stub :read_from_gcp, csv_content do
       Importer.import
     end
@@ -25,7 +27,8 @@ class ImporterTest < ActiveSupport::TestCase
   test "import feedback from gcp" do
     csv_content = CSV.read(
       Rails.root.join("test", "fixtures", "files", "answer_data.csv"),
-      headers: true)
+      headers: true,
+    )
     Importer.stub :read_from_gcp, csv_content do
       Importer.import
     end
@@ -34,6 +37,6 @@ class ImporterTest < ActiveSupport::TestCase
     assert_equal 22, Answer.count, "Expected 22 new Answer records to be created"
 
     assert_equal ["No additional comments.", "Last written comment."],
-      Answer.where(header: "any_other_comments").pluck(:value)
+                 Answer.where(header: "any_other_comments").pluck(:value)
   end
 end

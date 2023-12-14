@@ -4,7 +4,7 @@ class ExploreController < ApplicationController
     labels = Answer.all.where.not(header: "any_other_comments").map(&:header).uniq
     labels.each do |label|
       data = Answer.all.where.not(value: nil).where(header: label).group(:value).count
-      charts << ResultsOrderer.new({ label: label, data: data }).reorder
+      charts << ResultsOrderer.new({ label:, data: }).reorder
     end
     @charts = charts.to_json.html_safe
   end

@@ -6,7 +6,7 @@ class UserTest < ActiveSupport::TestCase
   end
 
   test "accepts viewer, tagger as role" do
-    [:viewer, :tagger].each do |role|
+    %i[viewer tagger].each do |_role|
       @user.role = :viewer
       assert @user.valid?
     end

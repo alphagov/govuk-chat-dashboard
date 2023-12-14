@@ -41,10 +41,10 @@ class Importer
           updated_at: row["updated_at"],
         )
 
-        ["was_answer_useful", "responses_were_useful", "experience_with_chat", "trusted_the_answers", "waiting_response_time", "inaccurate_or_inconsistent", "did_you_know_answers", "best_describes_you", "how_old_are_you", "internet_skill_rating", "any_other_comments"].each do |header|
+        %w[was_answer_useful responses_were_useful experience_with_chat trusted_the_answers waiting_response_time inaccurate_or_inconsistent did_you_know_answers best_describes_you how_old_are_you internet_skill_rating any_other_comments].each do |header|
           Answer.create!(
             feedback_id: feedback.id,
-            header: header,
+            header:,
             value: row[header],
           )
         end
@@ -57,12 +57,10 @@ class Importer
     import_feedback
   end
 
-  private
-
   def self.read_from_gcp(data_set)
     storage = Google::Cloud::Storage.new project: ENV["GCP_PROJECT_NAME"]
     bucket = storage.bucket(ENV["GCP_BUCKET_NAME"])
-    file = bucket.files(prefix: data_set).max_by { |f| f.created_at }
+    file = bucket.files(prefix: data_set).max_by(&:created_at)
     puts "Importing [#{file.name}] from GCP"
     download_file = file.download
     download_file.rewind
