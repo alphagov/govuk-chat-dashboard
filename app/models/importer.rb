@@ -7,7 +7,7 @@ class Importer
       Chat.delete_all
       ActiveRecord::Base.connection.reset_pk_sequence!("chats")
 
-      csv_data = read_from_gcp("chat")
+      csv_data = read_file("chat")
       csv_data.each do |row|
         Chat.create!(
           id: row["id"],
@@ -29,7 +29,7 @@ class Importer
       ActiveRecord::Base.connection.reset_pk_sequence!("answers")
       ActiveRecord::Base.connection.reset_pk_sequence!("feedbacks")
 
-      csv_data = read_from_gcp("feedback")
+      csv_data = read_file("feedback")
       csv_data.each do |row|
         feedback = Feedback.create!(
           id: row["id"],
@@ -55,6 +55,20 @@ class Importer
   def self.import
     import_chat
     import_feedback
+  end
+
+  def self.read_file(data_set)
+    if ENV["EXPORT_TO_CLOUD_STORAGE"] == "true"
+      read_from_gcp(data_set)
+    else
+      read_locally(data_set)
+    end
+  end
+
+  def self.read_locally(data_set)
+    filename = Dir.glob("imports/#{data_set}-*.csv").max_by { |f| File.mtime(f) }
+    puts "Importing [#{filename}] from local storage"
+    CSV.parse(File.read(filename), headers: true)
   end
 
   def self.read_from_gcp(data_set)
