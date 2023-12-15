@@ -1,10 +1,7 @@
 Rails.application.routes.draw do
-  get 'written/index'
-  get 'explore/index'
+  get "written/index"
+  get "explore/index"
   devise_for :users
-  resources :tags
-  resources :feedbacks
-  resources :chats
-  resources :answers
+  resources :answers, only: %i[index show]
   root to: "home#index"
 end

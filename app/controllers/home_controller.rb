@@ -13,10 +13,10 @@ class HomeController < ApplicationController
     @percentage_invalid_replies = calculate_percentage(@total_invalid_replies, @total_questions)
   end
 
-  private
+private
 
-  def calculate_percentage(x, y)
-    percentage = ((x.to_f / y.to_f) * 100).round(2)
+  def calculate_percentage(count, total)
+    percentage = ((count.to_f / total) * 100).round(2)
 
     "(#{percentage}%)"
   end

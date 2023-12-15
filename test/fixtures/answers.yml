@@ -1,13 +1,13 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  feedback_id: 1
-  header: MyString
-  title: MyString
-  value: MyString
+  feedback: one
+  header: was_answer_useful
+  title: Was answer useful
+  value: yes
 
 two:
-  feedback_id: 1
-  header: MyString
-  title: MyString
-  value: MyString
+  feedback: one
+  header: experience_with_chat
+  title: Experience with chat
+  value: yes
