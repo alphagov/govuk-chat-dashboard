@@ -1,24 +1,7 @@
-# README
+# GOV.UK Chat Dashboard
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+**Archived** This repository provided a companion Rails app for [govuk-chat-prototype](https://github.com/alphagov/govuk-chat-prototype) which provided a dashboard to see user insights. It was superseded by [govuk-chat](https://github.com/alphagov/govuk-chat) which has a built-in dashboard.
 
-Things you may want to cover:
+## Licence
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+[MIT License](LICENCE)
